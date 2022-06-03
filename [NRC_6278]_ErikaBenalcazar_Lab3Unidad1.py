@@ -118,3 +118,29 @@ class Grafo:
                     return resultado       
         ruta.pop()
         return None
+
+#Main (Función principal de ejecución)
+if __name__ == "__main__":
+    '''
+    Método Principal donde se instacia el objeto de la clase
+
+
+    '''
+    #Instancia el objeto Grafo, agrega valores
+    grf = Grafo(5, dirigido=False)
+
+    #Agrega las aristas del objeto grafo
+    grf.agregar_Arista(0, 1)
+    grf.agregar_Arista(0, 2)
+    grf.agregar_Arista(1, 3)
+    grf.agregar_Arista(2, 3)
+    grf.agregar_Arista(3, 4)
+    
+    #Imprime la lista de adyacencia
+    grf.imprimir_ListaAdj()
+
+    ruta_transversal = []
+    ruta_transversal = grf.busqueda_por_profundidad(0, 3)
+    print(f" Ruta Transversal de recorrido desde el nodo 0 hacia nodo 3 es {ruta_transversal}")
+
+
