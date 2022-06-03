@@ -83,3 +83,38 @@ class Grafo:
         for llave in self.m_lista_adyacencia.keys():
             # Imprime cada nodo que se encuentra en la lista de adyacencia
             print("Nodo", llave, ": ", self.m_lista_adyacencia[llave])
+
+    # Método búsqueda por profundidad 
+    def busqueda_por_profundidad(self, inicio, objetivo, ruta = [], visitado = set()):
+        '''
+        En este método realiza la búsqueda por profundidad donde recorre todos los nodos de manera
+        ordenada pero no uniforme
+
+        Parámetros
+        ----------
+        inicio: int 
+            Nodo de inicio para realizar el recorrido
+        objetivo: int
+            Nodo al que quiere llegar, a tráves del recorrido
+        ruta: lista
+            Recorrido de la ruta que realiza para llegar el nodo
+        visitados: set()
+            Inica la lista de nodos que ya han sido recorridos o visitados
+        '''
+                #Identifica el nodo de  inicio a la ruta
+        ruta.append(inicio)
+        #Agregar como nodo visitado
+        visitado.add(inicio)
+        #Si el nodo que esta de inicio es igual al objetivo planteado entonces retorna la ruta 
+        if inicio == objetivo:
+            return ruta
+        #Para esto de desarrolla un ciclo for donde agrega el nodo vecino y el peso a la lista
+        #de adyacencia el nodo de inicio
+        for (nodoVecino, peso) in self.m_lista_adyacencia[inicio]:
+            #En caso de no ser el nodo visitado, debe de recorres el método d búsqueda
+            if nodoVecino not in visitado:
+                resultado = self.busqueda_por_profundidad(nodoVecino, objetivo, ruta, visitado)
+                if resultado is not None:
+                    return resultado       
+        ruta.pop()
+        return None
